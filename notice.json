@@ -1,6 +1,11 @@
 {
-    "version": "0.4.0",
-    "force": false,
-    "description": "新增AI视觉识别功能",
-    "download": "https://xxx.com/DaiMeow_0.4.0.zip"
+    "version": "1.0.3",
+    "time": "2026-08-19",
+    "title": "呆喵更新公告",
+    "content": [
+        "新增GitHub自动公告系统",
+        "优化窗口缩放效果",
+        "修复Live2D显示异常问题"
+    ],
+    "force": false
 }
