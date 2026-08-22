@@ -1,0 +1,30 @@
+{
+		"Version": 3,
+		"FileReferences": {
+			"Moc": "daimeow.moc3",
+			"Textures": [
+				"daimeow.2048/texture_00.png"
+			],
+			"Physics": "daimeow.physics3.json",
+			"DisplayInfo": "daimeow.cdi3.json",
+			"Expressions": [
+				{
+					"Name": "expression1",
+					"File": "expression1.exp3.json"
+				}
+			]
+		},
+		"Groups": [
+			{
+				"Target": "Parameter",
+				"Name": "EyeBlink",
+				"Ids": []
+			},
+			{
+				"Target": "Parameter",
+				"Name": "LipSync",
+				"Ids": []
+			}
+		],
+		"HitAreas": []
+	}

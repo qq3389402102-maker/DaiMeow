@@ -1,0 +1,20 @@
+# 依赖
+node_modules/
+
+# 构建输出
+dist/
+out/
+release/
+
+# 宠物渲染器构建产物（由 `npm run build:pet` 自动生成）
+src/renderer/pet/pet-bundle.js
+src/renderer/pet/live2dcubismcore.js
+
+# 本地配置 / 日志
+*.log
+.DS_Store
+.idea/
+.claude/
+
+# 运行时生成
+*.local

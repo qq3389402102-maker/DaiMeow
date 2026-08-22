@@ -1,0 +1,32 @@
+{
+  "name": "daimeow",
+  "productName": "DaiMeow",
+  "version": "1.0.0",
+  "description": "呆喵 - Monster Hunter Palico Desktop Pet",
+  "main": "src/main/index.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "build:pet": "cp node_modules/@hazart-pkg/live2d-core/live2dcubismcore.min.js src/renderer/pet/live2dcubismcore.js && npx esbuild src/renderer/pet/pet-app-esm.js --bundle --outfile=src/renderer/pet/pet-bundle.js --format=iife --platform=browser --external:electron && node scripts/patch-bundle.js",
+    "prestart": "npm run build:pet"
+  },
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qq3389402102-maker/DaiMeow.git"
+  },
+  "homepage": "https://github.com/qq3389402102-maker/DaiMeow",
+  "bugs": {
+    "url": "https://github.com/qq3389402102-maker/DaiMeow/issues"
+  },
+  "devDependencies": {
+    "electron": "^34.0.0",
+    "esbuild": "^0.28.1"
+  },
+  "dependencies": {
+    "@hazart-pkg/live2d-core": "^1.0.1",
+    "pixi-live2d-display": "^0.4.0",
+    "pixi.js": "^7.4.3"
+  }
+}

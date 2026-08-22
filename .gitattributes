@@ -1,0 +1,5 @@
+# 统一换行符：文本文件自动使用 LF 入库
+* text=auto
+
+# 批处理脚本必须保留 CRLF（Windows cmd 需要）
+*.bat text eol=crlf
