@@ -2,7 +2,9 @@
 
 <img src="src/renderer/control/logo.png" width="120" alt="呆喵 logo" />
 
-[![Build](https://github.com/qq3389402102-maker/DaiMeow/actions/workflows/build.yml/badge.svg)](https://github.com/qq3389402102-maker/DaiMeow/actions/workflows/build.yml)
+[![Build](https://github.com/yubdey/DaiMeow/actions/workflows/build.yml/badge.svg)](https://github.com/yubdey/DaiMeow/actions/workflows/build.yml)
+[![Release](https://github.com/yubdey/DaiMeow/actions/workflows/build-release.yml/badge.svg)](https://github.com/yubdey/DaiMeow/actions/workflows/build-release.yml)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue)](https://github.com/yubdey/DaiMeow/releases)
 
 # 呆喵 DaiMeow
 
@@ -28,6 +30,44 @@
 - **统计面板**：本次运行 / 累计运行时间、对话数、Token 消耗
 - **聊天历史**：带截图的对话记录面板
 - **空闲检测**：60 秒无操作自动暂停截图，节省资源
+
+---
+
+## 📥 下载
+
+普通用户**不需要**下载源代码或安装开发环境。
+
+前往 [GitHub Releases](https://github.com/yubdey/DaiMeow/releases) 下载最新版本：
+
+- **`DaiMeow-vX.X.X-Windows-x64.zip`** —— 免安装绿色版，解压后直接运行 `DaiMeow.exe`
+- **`DaiMeow-Setup-vX.X.X-Windows-x64.exe`** —— 安装版，带开始菜单/桌面快捷方式
+
+### 系统要求
+
+- **操作系统**：Windows 10 / 11（64 位）
+- **网络**：使用云端 AI 需要联网；使用本地 Ollama 可离线
+- **无需安装** Node.js、Python 或任何开发环境
+
+### 首次运行
+
+1. 解压 ZIP 或运行安装程序
+2. 双击 `DaiMeow.exe` 启动
+3. 首次启动会弹出《呆喵使用须知》，点击「我知道了」
+4. 进入「设置」面板，选择 AI 服务商并填入 API Key（或选择 Ollama 本地模型）
+5. 回到主页点击「呆喵？启动！」，呆喵出现在屏幕角落开始观察
+
+### 关于 Ollama（可选）
+
+呆喵支持本地 Ollama 模型，**完全免费、离线可用**：
+1. 安装 [Ollama](https://ollama.com/)
+2. 命令行拉取视觉模型：`ollama run qwen3.5:4b`
+3. 呆喵设置里选「Ollama 本地模型」，程序会自动读取已安装的模型
+
+> Ollama 是外部独立服务，不属于呆喵 EXE 内置组件。
+
+### 如何更新到新版本
+
+下载新版本 ZIP，解压覆盖即可（配置和统计自动保留在 `%APPDATA%/daimeow/`）。或重新运行安装版 exe 覆盖安装。
 
 ---
 

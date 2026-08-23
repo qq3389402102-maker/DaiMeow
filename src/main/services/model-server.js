@@ -4,8 +4,12 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const { URL } = require('url');
+const { app } = require('electron');
 
-const MODEL_DIR = path.join(__dirname, '..', '..', '..', 'model');
+// 开发时：项目根/model；打包后：resources/model（extraResources 外置）
+const MODEL_DIR = app.isPackaged
+  ? path.join(process.resourcesPath, 'model')
+  : path.join(__dirname, '..', '..', '..', 'model');
 
 class ModelServer {
   constructor() {

@@ -4,29 +4,88 @@
   "version": "1.0.0",
   "description": "呆喵 - Monster Hunter Palico Desktop Pet",
   "main": "src/main/index.js",
+  "author": "yubdey",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yubdey/DaiMeow.git"
+  },
+  "homepage": "https://github.com/yubdey/DaiMeow",
+  "bugs": {
+    "url": "https://github.com/yubdey/DaiMeow/issues"
+  },
   "scripts": {
     "start": "electron .",
     "dev": "electron .",
     "build:pet": "cp node_modules/@hazart-pkg/live2d-core/live2dcubismcore.min.js src/renderer/pet/live2dcubismcore.js && npx esbuild src/renderer/pet/pet-app-esm.js --bundle --outfile=src/renderer/pet/pet-bundle.js --format=iife --platform=browser --external:electron && node scripts/patch-bundle.js",
-    "prestart": "npm run build:pet"
-  },
-  "author": "",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/qq3389402102-maker/DaiMeow.git"
-  },
-  "homepage": "https://github.com/qq3389402102-maker/DaiMeow",
-  "bugs": {
-    "url": "https://github.com/qq3389402102-maker/DaiMeow/issues"
+    "prestart": "npm run build:pet",
+    "predist": "npm run build:pet",
+    "dist": "electron-builder --win",
+    "dist:portable": "electron-builder --win portable",
+    "release": "electron-builder --win --publish always"
   },
   "devDependencies": {
     "electron": "^34.0.0",
+    "electron-builder": "^26.15.3",
     "esbuild": "^0.28.1"
   },
   "dependencies": {
     "@hazart-pkg/live2d-core": "^1.0.1",
     "pixi-live2d-display": "^0.4.0",
     "pixi.js": "^7.4.3"
+  },
+  "build": {
+    "appId": "com.yubdey.daimeow",
+    "productName": "DaiMeow",
+    "copyright": "Copyright © 2026 yubdey",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "model",
+        "to": "model"
+      },
+      {
+        "from": "启动呆喵.bat",
+        "to": "启动呆喵.bat"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "src/renderer/control/logo.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "DaiMeow"
+    },
+    "portable": {
+      "artifactName": "DaiMeow-${version}-Windows-x64.exe"
+    },
+    "nsisWeb": {
+      "artifactName": "DaiMeow-Setup-${version}-Windows-x64.exe"
+    }
   }
 }
