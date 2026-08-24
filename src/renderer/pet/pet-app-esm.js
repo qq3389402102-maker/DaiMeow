@@ -15,6 +15,8 @@ const app = new PIXI.Application({
 });
 
 Live2DModel.registerTicker(PIXI.Ticker);
+// 锁定 45 帧，平衡流畅度与资源占用（桌宠常驻后台，无需高帧率）
+app.ticker.maxFPS = 45;
 let live2dModel = null;
 let nativeW = 0, nativeH = 0;
 
@@ -43,7 +45,8 @@ async function loadModel() {
     applyLayout(true); // snap on load
     petAPI.notifyReady(app.screen.width, app.screen.height);
   } catch (err) {
-    console.error('Model load failed:', err);
+    console.error('Model load failed:', err.message, err.stack);
+    petAPI.logError('Model load: ' + err.message);
     document.body.insertAdjacentHTML('beforeend',
       '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:80px;pointer-events:none;position:fixed;top:0;left:0">🐱</div>');
     petAPI.notifyReady(window.innerWidth, window.innerHeight);

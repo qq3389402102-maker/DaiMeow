@@ -68,8 +68,8 @@ function createPetWindow() {
   });
 
   win.loadFile(path.join(__dirname, '..', 'renderer', 'pet', 'index.html'));
-  win.setAlwaysOnTop(true, 'screen-saver');
-  // Apply saved passthrough & opacity settings
+  // Apply saved always-on-top / passthrough / opacity settings
+  win.setAlwaysOnTop(config.alwaysOnTop ?? true, 'screen-saver');
   win.setIgnoreMouseEvents(config.mousePassthrough ?? true);
   if ((config.petOpacity ?? 1.0) < 1.0) {
     win.setOpacity(config.petOpacity);

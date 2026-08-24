@@ -1,4 +1,4 @@
-const { spawn } = require('child_process');
+const { spawn, execSync } = require('child_process');
 
 // PowerShell script that polls XInput right stick in a loop
 const PS_SCRIPT = `
@@ -82,6 +82,12 @@ class GamepadPoller {
       this.proc.on('error', (err) => {
         console.error('[GamepadPoller] PowerShell error:', err.message);
       });
+
+      // PowerShell 进程退出时重置状态（崩溃后允许重启）
+      this.proc.on('exit', () => {
+        this.proc = null;
+        this.running = false;
+      });
     } catch (err) {
       console.error('[GamepadPoller] Failed to start:', err.message);
     }
@@ -90,7 +96,12 @@ class GamepadPoller {
   stop() {
     this.running = false;
     if (this.proc) {
-      this.proc.kill();
+      try {
+        // force kill 整个进程树，避免 PowerShell 在 Start-Sleep 中不响应 kill
+        execSync(`taskkill /F /T /PID ${this.proc.pid}`, { windowsHide: true, stdio: 'ignore' });
+      } catch {
+        // 进程可能已退出，忽略
+      }
       this.proc = null;
     }
   }

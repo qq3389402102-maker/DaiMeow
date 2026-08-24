@@ -98,6 +98,10 @@ app.whenReady().then(async () => {
         gamepadPoller.start();
       }
     },
+    stopPollers: () => {
+      if (mousePoller) { mousePoller.stop(); mousePoller = null; }
+      if (gamepadPoller) { gamepadPoller.stop(); gamepadPoller = null; }
+    },
     startLoop,
     stopLoop,
   });
@@ -180,9 +184,9 @@ function stopLoop() {
   }
   statsTracker.flush();
   statsTracker.stop();
-  // 停止循环时一并停掉鼠标/手柄轮询，避免隐藏窗口后空转
-  if (mousePoller) { mousePoller.stop(); mousePoller = null; }
-  if (gamepadPoller) { gamepadPoller.stop(); gamepadPoller = null; }
+  // 注意：不在此停止 mousePoller/gamepadPoller。
+  // 它们是视线追踪功能，与截图循环独立；stopLoop 会被 startLoop 开头调用，
+  // 若在此停 poller 会把刚启动的追踪清掉。poller 仅在 control:stop / 退出时停。
 }
 
 let cycleRunning = false;

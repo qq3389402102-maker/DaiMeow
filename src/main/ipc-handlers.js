@@ -30,8 +30,10 @@ function registerIpcHandlers(ctx) {
     if (petWindow && !petWindow.isDestroyed()) {
       petWindow.show();
       const config = getConfig();
-      petWindow.webContents.send('pet:passthrough-changed', config.mousePassthrough ?? true);
+      petWindow.webContents.send('pet:passthrough-changed', config.mousePassthrough ?? false);
       petWindow.webContents.send('pet:fixed-changed', config.fixedPosition ?? false);
+      // 应用置顶设置
+      petWindow.setAlwaysOnTop(config.alwaysOnTop ?? true, 'screen-saver');
       // 重启时确保鼠标/手柄轮询恢复（stopLoop 已将其停止）
       ctx.startMousePoller();
     }
@@ -41,6 +43,7 @@ function registerIpcHandlers(ctx) {
 
   ipcMain.handle('control:stop', async () => {
     ctx.stopLoop();
+    ctx.stopPollers(); // 隐藏窗口后停掉视线追踪，避免空转
     const petWindow = ctx.getPetWindow();
     if (petWindow && !petWindow.isDestroyed()) petWindow.hide();
     return true;
@@ -143,6 +146,16 @@ function registerIpcHandlers(ctx) {
     const petWindow = ctx.getPetWindow();
     if (petWindow && !petWindow.isDestroyed()) {
       petWindow.setOpacity(value);
+    }
+    return true;
+  });
+
+  // 置于顶层开关（原生 TopMost，screen-saver 层级）
+  ipcMain.handle('control:set-topmost', async (event, enabled) => {
+    saveConfig({ alwaysOnTop: enabled });
+    const petWindow = ctx.getPetWindow();
+    if (petWindow && !petWindow.isDestroyed()) {
+      petWindow.setAlwaysOnTop(enabled, 'screen-saver');
     }
     return true;
   });

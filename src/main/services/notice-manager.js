@@ -35,7 +35,9 @@ class NoticeManager {
       const isForced = data.force === true;
 
       // 版本不新且未强制 → 跳过
+      // force 公告也走版本去重：已显示过的 force 公告不再重复弹
       if (!isNew && !isForced) return null;
+      if (isForced && !isNew) return null;
 
       return {
         version: data.version,

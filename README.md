@@ -4,7 +4,7 @@
 
 [![Build](https://github.com/yubdey/DaiMeow/actions/workflows/build.yml/badge.svg)](https://github.com/yubdey/DaiMeow/actions/workflows/build.yml)
 [![Release](https://github.com/yubdey/DaiMeow/actions/workflows/build-release.yml/badge.svg)](https://github.com/yubdey/DaiMeow/actions/workflows/build-release.yml)
-[![Version](https://img.shields.io/badge/version-1.0.0-blue)](https://github.com/yubdey/DaiMeow/releases)
+[![Version](https://img.shields.io/badge/version-1.1.0-blue)](https://github.com/yubdey/DaiMeow/releases)
 
 # 呆喵 DaiMeow
 

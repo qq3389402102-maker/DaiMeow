@@ -375,7 +375,8 @@ async function loadConfigToForm() {
 
   // New controls
   document.getElementById('editFixedPosition').checked = config.fixedPosition || false;
-  document.getElementById('editMousePassthrough').checked = config.mousePassthrough ?? true;
+  document.getElementById('editMousePassthrough').checked = config.mousePassthrough ?? false;
+  document.getElementById('editAlwaysOnTop').checked = config.alwaysOnTop ?? true;
   const opacity = Math.round((config.petOpacity ?? 1.0) * 100);
   document.getElementById('editOpacity').value = opacity;
   document.getElementById('editOpacityVal').textContent = opacity + '%';
@@ -457,10 +458,12 @@ document.getElementById('resetEditBtn').addEventListener('click', async () => {
   document.getElementById('editOpacity').value = 100;
   document.getElementById('editOpacityVal').textContent = '100%';
   document.getElementById('editFixedPosition').checked = false;
-  document.getElementById('editMousePassthrough').checked = true;
+  document.getElementById('editMousePassthrough').checked = false;
+  document.getElementById('editAlwaysOnTop').checked = true;
   api.invoke('control:set-opacity', 1.0);
   api.invoke('control:set-fixed-position', false);
-  api.invoke('control:set-passthrough', true);
+  api.invoke('control:set-passthrough', false);
+  api.invoke('control:set-topmost', true);
   showToast('已恢复默认');
 });
 
@@ -474,6 +477,11 @@ document.getElementById('editFixedPosition').addEventListener('change', (e) => {
 // Mouse passthrough toggle
 document.getElementById('editMousePassthrough').addEventListener('change', (e) => {
   api.invoke('control:set-passthrough', e.target.checked);
+});
+
+// Always on top toggle
+document.getElementById('editAlwaysOnTop').addEventListener('change', (e) => {
+  api.invoke('control:set-topmost', e.target.checked);
 });
 
 // Opacity slider
